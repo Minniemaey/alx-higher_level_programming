@@ -1,41 +1,70 @@
 #include "lists.h"
 
 /**
- * is_palindrome - check if linked list is palindromic
- * @head: double pointer to list head node
+ * reverse_list - function that reverses a linked list
+ * @head: ptr to head node
+ * Return: ptr to new list
+ */
+void reverse_list(listint_t **head)
+{
+	listint_t *prev = NULL;
+	listint_t *curr = *head;
+	listint_t *next = NULL;
+
+	while (curr)
+	{
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+	}
+
+	*head = prev;
+}
+
+/**
+ * is_palindrome - checks if linked list is palindromic
+ * @head: double pointer to head node
  * Return: 1 if palindrome else 0
  */
-
 int is_palindrome(listint_t **head)
 {
-	listint_t *tmp = *head;
-	int *arr = malloc(100000 * sizeof(int));
-	int i = 1, arr_size = sizeof(int);
-	int palin1 = 0, palin2 = i - 1;
+	listint_t *ptr1 = *head, *ptr2 = *head, *tmp = *head, *rev = NULL;
 
-	arr[0] = (*head)->n;
-
-	if (head == NULL)
-		return (0);
-	if (*head == NULL)
+	if (*head == NULL || (*head)->next == NULL)
 		return (1);
 
-	tmp = tmp->next;
+	while (1)
+	{
+		ptr1 = ptr1->next->next;
+		if (!ptr1)
+		{
+			rev = ptr2->next;
+			break;
+		}
+		if (!ptr1->next)
+		{
+			rev  = ptr2->next->next;
+			break;
+		}
+		ptr2 = ptr2->next;
+	}
 
-	while (tmp != NULL)
+	reverse_list(&rev);
+
+	while (rev && tmp)
 	{
-		arr_size += sizeof(int);
-		arr = realloc(arr, arr_size);
-		arr[i] = tmp->n;
-		i++;
-		tmp = tmp->next;
-	}
-	while (palin1 <= palin2)
-	{
-		if (arr[palin1] != arr[palin2])
+		if (tmp->n == rev->n)
+		{
+			rev = rev->next;
+			tmp = tmp->next;
+		}
+		else
 			return (0);
-		palin1++;
-		palin2--;
 	}
-	return (1);
+
+	if (!rev)
+		return (1);
+
+	return (0);
 }
