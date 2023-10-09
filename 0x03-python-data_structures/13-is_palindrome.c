@@ -9,25 +9,28 @@
 int is_palindrome(listint_t **head)
 {
 	listint_t *tmp = *head;
-	int i = 0, len = 0;
-	int *arr = malloc(len * sizeof(int));
+	int *arr = malloc(100000 * sizeof(int));
+	int i = 1, arr_size = sizeof(int);
 	int palin1 = 0, palin2 = i - 1;
 
-	if (*head == NULL || (*head)->next == NULL)
+	arr[0] = (*head)->n;
+
+	if (*head == NULL)
 		return (1);
-	if (arr == NULL)
-		return (0);
+
+	tmp = tmp->next;
 
 	while (tmp != NULL)
 	{
-		len++;
+		arr_size += sizeof(int);
+		arr = realloc(arr, arr_size);
+		arr[i] = tmp->n;
+		i++;
 		tmp = tmp->next;
 	}
-
-	tmp = *head;
-	for (i = 0; i < len / 2; i++)
+	for (; palin1 < palin2; palin1++, palin2--)
 	{
-		if (arr[i] != arr[len - i -1])
+		if (arr[palin1] != arr[palin2])
 			return (0);
 	}
 	return (1);
