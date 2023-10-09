@@ -3,9 +3,9 @@
 #include <Python.h>
 
 /**
- * print_python_list_info - Prints basic info about a Python list
- * @p: pointer to a python object
- */
+* print_python_list_info - Prints basic info about a Python list
+* @p: pointer to a python object
+*/
 
 void print_python_list_info(PyObject *p)
 {
@@ -15,12 +15,12 @@ void print_python_list_info(PyObject *p)
 	size = PyList_Size(p);
 	alloc = ((PyListObject *)p)->allocated;
 
-    	printf("[*] Size of the Python List = %ld\n", size);
-    	printf("[*] Allocated = %ld\n", alloc);
+	printf("[*] Size of the Python List = %ld\n", size);
+	printf("[*] Allocated = %ld\n", alloc);
 
-    	for (s = 0; s < size; s++)
-    	{
+	for (s = 0; s < size; s++)
+	{
 		object = PyList_GetItem(p, s);
-        	printf("Element %ld: %s\n", s, Py_TYPE(object)->tp_name);
-    	}
+		printf("Element %ld: %s\n", s, Py_TYPE(object)->tp_name);
+	}
 }
