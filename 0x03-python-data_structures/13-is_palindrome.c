@@ -18,7 +18,7 @@ int is_palindrome(listint_t **head)
 {
 	listint_t *tmp = *head;
 	int *arr = malloc(100000 * sizeof(int));
-	int i = 1, arr_size = sizeof(int);
+	int i = 0, arr_size = 0;
 	int palin1 = 0, palin2 = i - 1;
 
 	arr[0] = (*head)->n;
@@ -30,7 +30,7 @@ int is_palindrome(listint_t **head)
 
 	while (tmp != NULL)
 	{
-		arr_size += sizeof(int);
+		arr_size = (i + 1) * sizeof(int);
 		arr = realloc(arr, arr_size);
 		arr[i] = tmp->n;
 		i++;
