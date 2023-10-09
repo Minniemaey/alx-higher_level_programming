@@ -28,10 +28,12 @@ int is_palindrome(listint_t **head)
 		i++;
 		tmp = tmp->next;
 	}
-	for (; palin1 <= palin2; palin1++, palin2--)
+	while (palin1 <= palin2)
 	{
 		if (arr[palin1] != arr[palin2])
 			return (0);
+		palin1++;
+		palin2--;
 	}
 	return (1);
 }
