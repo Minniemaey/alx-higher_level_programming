@@ -1,14 +1,6 @@
 #include "lists.h"
 
 /**
- * is_palindrome - checks if a linked list is a palindrome
- * @head: double pointer to list head node
- * Return: 1 if palindrome else 0
- */
-
-#include "lists.h"
-
-/**
  * is_palindrome - check if linked list is palindromic
  * @head: double pointer to list head node
  * Return: 1 if palindrome else 0
@@ -23,7 +15,7 @@ int is_palindrome(listint_t **head)
 
 	arr[0] = (*head)->n;
 
-	if (*head == NULL)
+	if (*head == NULL || (*head)->next == NULL)
 		return (1);
 
 	tmp = tmp->next;
