@@ -1,47 +1,49 @@
 #include "lists.h"
 
 /**
- * is_palindrome - check if linked list is palindromic
+ * is_palindrome - checks if a linked list is a palindrome
  * @head: double pointer to list head node
  * Return: 1 if palindrome else 0
  */
 
 int is_palindrome(listint_t **head)
 {
-	listint_t *tmp = *head;
-	int *arr = malloc(100000 * sizeof(int));
-	int i = 1, arr_size = 100000;
-	int palin1 = 0, palin2 = i - 1;
+	listint_t *ptr1 = *head, *ptr2 = *head, *curr, *prev;
+	int palin = 0;
 
-	arr[0] = (*head)->n;
-
-	if (*head == NULL)
-		free(arr);
-		return (1);
-
-	tmp = tmp->next;
-
-	while (tmp != NULL)
+	while (ptr2 != NULL && ptr2->next != NULL)
 	{
-		if (i >= arr_size)
-		{
-			arr_size *= 2;
-			arr = realloc(arr, arr_size * sizeof(int));
-		}
-		arr[i] = tmp->n;
-		i++;
-		tmp = tmp->next;
+		ptr2 = ptr2->next->next;
+		ptr1 = ptr1->next;
 	}
-	while (palin1 < palin2)
+	curr = ptr1;
+	prev = NULL;
+	while (curr)
 	{
-		if (arr[palin1] != arr[palin2])
-		{
-			free(arr)
-			return (0);
-		}
-		palin1++;
-		palin2--;
+		ptr2 = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = fast;
 	}
-	free(arr)
-	return (1);
+	ptr2 = *head;
+	curr = prev;
+	while (prev)
+	{
+		if (ptr2->n != prev->n)
+		{
+			palin = 1;
+			break;
+		}
+		ptr2 = ptr2->next;
+		prev = prev->next;
+	}
+	prev = NULL;
+	while (curr)
+	{
+		ptr2 = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = ptr2;
+	}
+	return (!palin);
 }
